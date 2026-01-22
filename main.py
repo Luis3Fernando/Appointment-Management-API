@@ -32,7 +32,7 @@ def home():
         "docs": "/docs"
     }
 
-@router.get("/citas")
+@router.get("/list") 
 def listar_citas(limit: int = Query(10, description="Número de registros a retornar")):
     return {
         "total": len(CITAS_DB),
@@ -40,9 +40,11 @@ def listar_citas(limit: int = Query(10, description="Número de registros a reto
         "data": CITAS_DB[:limit]
     }
 
-@router.post("/citas/crear")
+@router.post("/crear")
 def crear_cita(cita: Cita):
     return {
         "mensaje": "Cita recibida correctamente en el servidor AWS",
         "data_recibida": cita
     }
+
+app.include_router(router)
