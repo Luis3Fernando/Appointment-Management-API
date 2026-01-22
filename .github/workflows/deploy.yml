@@ -20,13 +20,19 @@ jobs:
           script: |
             PROJECT_DIR="~/Appointment-Management-API"
 
+            git config --global --add safe.directory $PROJECT_DIR
+
             if [ ! -d "$PROJECT_DIR" ]; then
               git clone https://github.com/${{ github.repository }}.git $PROJECT_DIR
             fi
             
             cd $PROJECT_DIR
             git pull origin main
-            
-            sudo docker-compose down
-            sudo docker-compose up --build -d
-            echo "¡API desplegada y corriendo en el puerto 80!"
+
+            export EMAIL_USER="${{ secrets.EMAIL_USER }}"
+            export EMAIL_PASSWORD="${{ secrets.EMAIL_PASSWORD }}"
+
+            sudo -E docker-compose down
+            sudo -E docker-compose up --build -d
+
+            echo "¡Despliegue exitoso! API corriendo y base de datos actualizada."

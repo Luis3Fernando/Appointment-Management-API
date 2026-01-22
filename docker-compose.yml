@@ -31,6 +31,8 @@ services:
       - "80:80"
     environment:
       - DATABASE_URL=postgresql://user_admin:pass123@db_postgres:5432/appointments_db
+      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
     depends_on:
       - db_postgres
     deploy:
