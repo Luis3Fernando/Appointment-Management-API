@@ -1,13 +1,47 @@
 version: '3.8'
 
 services:
+  db_postgres:
+    image: postgres:15-alpine
+    container_name: db_appointments
+    restart: always
+    environment:
+      POSTGRES_USER: user_admin
+      POSTGRES_PASSWORD: pass123
+      POSTGRES_DB: appointments_db
+    command: >
+      postgres 
+      -c max_connections=20 
+      -c shared_buffers=32MB 
+      -c work_mem=4MB
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - appointments_net
+
   appointment-api:
     build: .
     container_name: appointment_management_api
     restart: always
     ports:
       - "80:80"
+    environment:
+      - DATABASE_URL=postgresql://user_admin:pass123@db_postgres:5432/appointments_db
+    depends_on:
+      - db_postgres
     deploy:
       resources:
         limits:
-          memory: 256M
+          memory: 200M
+    networks:
+      - appointments_net
+
+networks:
+  appointments_net:
+
+volumes:
+  postgres_data:
