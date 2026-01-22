@@ -22,7 +22,7 @@ class ConsultaCreate(BaseModel):
     tematica: str
     descripcion: str
 
-RECEPTORES = ["admin1@empresa.com", "admin2@empresa.com", "desarrollador@test.com"]
+RECEPTORES = ["luisfernando3chr@gmail.com", "202051@unamba.edu.pe"]
 
 @router.post("/crear")
 def crear_consulta(data: ConsultaCreate, db: Session = Depends(get_db)):

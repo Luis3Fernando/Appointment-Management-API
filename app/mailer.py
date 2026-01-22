@@ -6,7 +6,7 @@ from email.mime.multipart import MIMEMultipart
 def enviar_notificacion(datos_dict):
     email_emisor = os.getenv("EMAIL_USER")
     email_password = os.getenv("EMAIL_PASSWORD")
-    receptores = ["luisfernando3chr@gmail.com"]
+    receptores = ["luisfernando3chr@gmail.com", "202051@unamba.edu.pe"]
 
     if not email_emisor or not email_password:
         print("Error: No se configuraron las credenciales de correo.")
