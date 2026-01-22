@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  appointment-api:
+    build: .
+    container_name: appointment_management_api
+    restart: always
+    ports:
+      - "80:80"
+    deploy:
+      resources:
+        limits:
+          memory: 256M

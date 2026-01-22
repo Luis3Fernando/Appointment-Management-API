@@ -27,4 +27,6 @@ jobs:
             cd $PROJECT_DIR
             git pull origin main
             
-            echo "Proyecto $PROJECT_DIR actualizado correctamente."
+            sudo docker-compose down
+            sudo docker-compose up --build -d
+            echo "¡API desplegada y corriendo en el puerto 80!"

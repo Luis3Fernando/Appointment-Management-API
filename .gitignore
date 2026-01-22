@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Entornos virtuales
+venv/
+env/
+.env/
+
+# Docker (opcional, por si se crean logs locales)
+.docker/
+
+# IDEs
+.vscode/
+.idea/
