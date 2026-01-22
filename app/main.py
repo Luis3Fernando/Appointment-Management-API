@@ -4,6 +4,7 @@ from typing import Optional, List
 from .database import SessionLocal, engine, get_db, Base
 from .models import Consulta
 from pydantic import BaseModel, EmailStr
+from .mailer import enviar_notificacion, RECEPTORES
 
 Base.metadata.create_all(bind=engine)
 
@@ -22,7 +23,6 @@ class ConsultaCreate(BaseModel):
     tematica: str
     descripcion: str
 
-RECEPTORES = ["luisfernando3chr@gmail.com", "202051@unamba.edu.pe"]
 
 @router.post("/crear")
 def crear_consulta(data: ConsultaCreate, db: Session = Depends(get_db)):
@@ -30,7 +30,9 @@ def crear_consulta(data: ConsultaCreate, db: Session = Depends(get_db)):
     db.add(nueva_consulta)
     db.commit()
     db.refresh(nueva_consulta)
-    print(f"NOTIFICACIÓN: Enviando datos a {RECEPTORES}")
+    enviar_notificacion(data.dict()) 
+    
+    print(f"NOTIFICACIÓN: Proceso de envío iniciado para {RECEPTORES}")
     
     return {"mensaje": "Consulta creada y notificaciones enviadas", "id": nueva_consulta.id}
 

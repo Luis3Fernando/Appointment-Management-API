@@ -3,18 +3,19 @@ import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+RECEPTORES = ["luisfernando3chr@gmail.com", "202051@unamba.edu.pe"]
+
 def enviar_notificacion(datos_dict):
     email_emisor = os.getenv("EMAIL_USER")
     email_password = os.getenv("EMAIL_PASSWORD")
-    receptores = ["luisfernando3chr@gmail.com", "202051@unamba.edu.pe"]
 
     if not email_emisor or not email_password:
-        print("Error: No se configuraron las credenciales de correo.")
+        print("Error: No se configuraron las credenciales.")
         return
 
     mensaje = MIMEMultipart()
     mensaje["From"] = email_emisor
-    mensaje["To"] = ", ".join(receptores)
+    mensaje["To"] = ", ".join(RECEPTORES)
     mensaje["Subject"] = f"Nueva Consulta: {datos_dict.get('tematica')}"
 
     cuerpo = f"""
@@ -28,9 +29,10 @@ def enviar_notificacion(datos_dict):
     mensaje.attach(MIMEText(cuerpo, "plain"))
 
     try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as servidor:
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=15) as servidor:
+            servidor.starttls() 
             servidor.login(email_emisor, email_password)
-            servidor.sendmail(email_emisor, receptores, mensaje.as_string())
-        print("Correo enviado exitosamente.")
+            servidor.sendmail(email_emisor, RECEPTORES, mensaje.as_string())
+        print("¡LOGRO!: Correo enviado exitosamente.")
     except Exception as e:
-        print(f"Error al enviar correo: {e}")
+        print(f"ERROR CRÍTICO AL ENVIAR CORREO: {e}")
