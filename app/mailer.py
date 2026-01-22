@@ -16,7 +16,7 @@ def enviar_notificacion(datos_dict):
     mensaje = MIMEMultipart("alternative")
     mensaje["From"] = f"Sistema de Citas <{email_emisor}>"
     mensaje["To"] = ", ".join(RECEPTORES)
-    mensaje["Subject"] = f"🔔 Nueva Consulta: {datos_dict.get('tematica')}"
+    mensaje["Subject"] = f"Nueva Consulta: {datos_dict.get('tematica')}"
 
     html = f"""
     <html>
@@ -41,8 +41,7 @@ def enviar_notificacion(datos_dict):
                 </div>
             </div>
             <div style="background-color: #f4f7f6; padding: 15px; text-align: center; color: #888; font-size: 12px;">
-                Este es un mensaje automático generado por el sistema desplegado por <strong>Louis3f3</strong>.<br>
-                © 2026 Sistema de Gestión de Citas.
+                Este es un mensaje automático generado por el sistema de gestión de consultas.
             </div>
         </div>
     </body>
