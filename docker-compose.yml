@@ -28,7 +28,7 @@ services:
     container_name: appointment_management_api
     restart: always
     ports:
-      - "80:80"
+      - "8001:80"
     environment:
       - DATABASE_URL=postgresql://user_admin:pass123@db_postgres:5432/appointments_db
       - EMAIL_USER=${EMAIL_USER}
