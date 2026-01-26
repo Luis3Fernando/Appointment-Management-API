@@ -24,7 +24,7 @@ def enviar_notificacion(datos_dict):
         <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-top: 5px solid #00d2ff;">
             <div style="background-color: #1a1a1a; padding: 20px; text-align: center;">
                 <h1 style="color: #00d2ff; margin: 0; font-size: 24px;">Nueva Consulta Recibida</h1>
-                <p style="color: #ffffff; font-size: 14px; margin-top: 5px;">Gestión de Citas - AWS Lightsail</p>
+                <p style="color: #ffffff; font-size: 14px; margin-top: 5px;">Gestión de consultas</p>
             </div>
             <div style="padding: 30px;">
                 <h2 style="color: #333; border-bottom: 1px solid #eee; padding-bottom: 10px;">Información del Solicitante</h2>
